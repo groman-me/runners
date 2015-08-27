@@ -11,8 +11,8 @@
       <h1>Бегущие люди</h1>
       <div>
         <p> Статистика за
-          <a href="#week"  onclick="d3.json('http://localhost:9292/week.json', function(rows) { chart.updateBars(rows); });">неделю</a>
-          и за <a href="#month" onclick="d3.json('http://localhost:9292/month.json', function(rows) { chart.updateBars(rows); });">месяц</a>
+          <a href="#week"  onclick="d3.json('http://runners-groman.rhcloud.com/week.json', function(rows) { chart.updateBars(rows); });">неделю</a>
+          и за <a href="#month" onclick="d3.json('http://runners-groman.rhcloud.com/month.json', function(rows) { chart.updateBars(rows); });">месяц</a>
         </p>
       </div>
 
@@ -25,7 +25,7 @@
 
   <script>
     var chart = new Chart();
-    d3.json("http://localhost:9292/week.json", function(rows) {
+    d3.json("http://runners-groman.rhcloud.com/week.json", function(rows) {
     //      console.log(rows);
       chart.initChart(rows);
       chart.buildBars();
