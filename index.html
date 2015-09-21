@@ -5,14 +5,15 @@
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/d3.min.js"></script>
     <script src="js/chart.js"></script>
+    <script src="js/app.js"></script>
   </head>
   <body>
     <div class="header">
       <h1>Бегущие люди</h1>
       <div>
         <p> Статистика за
-          <a href="#week"  onclick="d3.json('http://runners-groman.rhcloud.com/week.json', function(rows) { chart.updateBars(rows); });">неделю</a>
-          и за <a href="#month" onclick="d3.json('http://runners-groman.rhcloud.com/month.json', function(rows) { chart.updateBars(rows); });">месяц</a>
+          <a href="#week" class="js-set-period" data-period="week">неделю</a>
+          и за <a href="#month" class="js-set-period" data-period="month">месяц</a>
         </p>
       </div>
 
@@ -24,12 +25,14 @@
     </div>
 
   <script>
-    var chart = new Chart();
-    d3.json("http://runners-groman.rhcloud.com/week.json", function(rows) {
-    //      console.log(rows);
-      chart.initChart(rows);
-      chart.buildBars();
-    });
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-67911100-1', 'auto');
+  ga('send', 'pageview');
+
   </script>
   </body>
 </html>

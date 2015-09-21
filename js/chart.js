@@ -28,6 +28,11 @@ window.Chart = (function() {
       self.config.mainChartWidth = self.config.width - self.config.leftLabelsWidth - 80;
 
       self.config.animationDuration = 500;
+      if (w.location.host.indexOf('localhost') >= 0) {
+        self.config.jsonHost = 'http://localhost:9292'
+      } else {
+        self.config.jsonHost = 'http://runners-groman.rhcloud.com'
+      }
       d3.select(".chart")
           .attr("width", self.config.width + margin.left )
           .attr("height", self.config.height + margin.top + margin.bottom)
@@ -192,4 +197,32 @@ Chart.prototype.updateLabels = function(){
   ybox.data(this.data);
   ybox.selectAll("text").data(function(d) { return[d.full_name] })
       .text(function(d){ return d;} );
+};
+
+Chart.prototype.validatePeriod = function(period) {
+  if (period !== "week" && period !== "month") {
+    console.log("wrong period: " + period);
+    return false;
+  } else {
+    return true;
+  }
+};
+
+Chart.prototype.init = function(period) {
+  var graph = this;
+  if (!graph.validatePeriod(period)) return;
+
+  d3.json(graph.config.jsonHost + "/" + period + ".json", function(rows) {
+    graph.initChart(rows);
+    graph.buildBars();
+  });
+};
+
+Chart.prototype.update = function(period) {
+  var graph = this;
+  if (!graph.validatePeriod(period)) return;
+
+  d3.json(graph.config.jsonHost + "/" + period + ".json", function(rows) {
+    graph.updateBars(rows);
+  });
 };

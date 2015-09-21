@@ -58,7 +58,7 @@ rect.bar, text.yearTo {
     margin: 15px;
     top:100px;
     left:0px;
-    min-width:1150px;
+    /*min-width:1150px;*/
     width: 97%;
     min-height:550px;
     box-shadow: 1px 2px 4px 2px #777;
